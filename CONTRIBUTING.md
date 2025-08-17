@@ -1,6 +1,6 @@
 # "noise-app__react" Contributing Guide
 
-## Welcome
+### Welcome
 
 This project is a part of [Web Development learning class](https://hattifnatt4r.github.io/sd). It is designed to help learn ReactJS, Python APIs, Database basics and more.
 
@@ -10,9 +10,11 @@ See our Discord server for details (https://discord.gg/wAMEqRMbdm), or meet us i
 Please contact organizers through Discord or email if you're an experienced developer and willing to help with feedback or the projects setup. 
 
 
-## App overview
-
+### App overview
 "noise-app__react" is a productivity app that lets you play ambient sounds and combine them into custom mixes.
+
+App URL: WIP
+
 
 Features:
 * Play one or multiple sounds
@@ -21,14 +23,15 @@ Features:
 * (Optional) Upload custom sounds
 * (Optional) Send sound combo to another user
 
+<br>
 
-## Environment setup
+# Contribution workflow
+
+### Environment setup
 
 WIP: Front-end only setup
 
 WIP: Back-end setup
-
-## Contribution workflow
 
 ### Commit messages
 
