@@ -1,2 +1,2 @@
-# practice-app-sound_react
-Learn React by making a productivity/sound app
+# noise-app__react
+Learn React, Python APIs, database basics
