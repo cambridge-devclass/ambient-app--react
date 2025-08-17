@@ -1,4 +1,4 @@
-# "noise-app__react" Contributing Guide
+# "ambient-app--react" Contributing Guide
 
 ### Welcome
 
@@ -9,21 +9,7 @@ See our Discord server for details (https://discord.gg/wAMEqRMbdm), or meet us i
 **Due to limited resources, contributions are currently open to class members only.**
 Please contact organizers through Discord or email if you're an experienced developer and willing to help with feedback or the projects setup. 
 
-
-### App overview
-"noise-app__react" is a productivity app that lets you play ambient sounds and combine them into custom mixes.
-
-App URL: WIP
-
-
-Features:
-* Play one or multiple sounds
-* Save sound combination to your profile
-* Set a timer to stop the sound
-* (Optional) Upload custom sounds
-* (Optional) Send sound combo to another user
-
-<br>
+See [README.md](https://github.com/cambridge-devclass/ambient-app--react/blob/main/README.md) for the details about the app.
 
 # Contribution workflow
 
