@@ -1,3 +1,15 @@
 /config/db.py
 __pycache__/
 /init/__pycache__/
+# Environments
+.env
+.envrc
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Flask secret key file
+flask_secret_key.txt
