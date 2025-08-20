@@ -73,7 +73,7 @@ In every working session make sure you
     * Running on http://127.0.0.1:5000
     Press CTRL+C to quit
     ```
-3. Navigate to the URL shown to test the `/` route
+3. Navigate to the URL shown for basic info and a link to an interactive API doc+test page
 
 The basic definition for the Flask app is in [`server/api/__init__.py`](server/api/__init__.py). Routes are in [`server/api/routes.py`](server/api/routes.py)
 
