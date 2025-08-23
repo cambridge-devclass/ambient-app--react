@@ -1,3 +1,13 @@
 {
-  "python.analysis.typeCheckingMode": "basic"
+  "python.analysis.typeCheckingMode": "basic",
+  // Configure Python to format on save to ensure consistent formatting
+  // This relies on users installing the "ms-python.black-formatter" and
+  // "ms-python.isort" from the recommended extensions.json
+  "[python]": {
+    "editor.defaultFormatter": "ms-python.black-formatter",
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": "explicit"
+    },
+    "editor.formatOnSave": true
+  }
 }
