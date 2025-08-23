@@ -137,7 +137,6 @@ def get_sample(id: int):
       200:
         description: Valid session. Returns test HTML.
     """
-    # Refer to parameters by name
     return {
         "message": f"Data for passed id={id}, body data={request.get_json().get("data")}, query={request.args.get("option")}"
     }

@@ -24,6 +24,7 @@ class User(UserMixin):
         return check_password_hash(self.password_hash, password)
 
 
+# Temporary storage for a few users until the DB is hooked up
 ALL_USERS = [
     User(1, "test1", "test password"),
     User(2, "test2", "other password"),
