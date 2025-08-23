@@ -1,3 +1,6 @@
+# Set up isort to be compatible with our code formatter and to
+# treat everything in this folder as first-party code so that
+# our modules/packages show at the bottom of the import list
 [tool.isort]
 profile = "black"
 src_paths = ["."]

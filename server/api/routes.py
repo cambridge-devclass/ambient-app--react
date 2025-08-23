@@ -113,6 +113,14 @@ def get_sample(id: int):
     Sample endpoint taking a path parameter, body data, and query parameter.
 
     Form and header data are also available
+
+    The doc string below is YAML for OpenAPI v2.0
+
+    https://github.com/OAI/OpenAPI-Specification/blob/main/versions/2.0.md
+
+    E.g. here is the spec on documenting API parameters
+
+    https://github.com/OAI/OpenAPI-Specification/blob/main/versions/2.0.md#parameter-object
     ---
     parameters:
       - in: path
