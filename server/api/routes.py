@@ -6,10 +6,13 @@ Routes are various URLs in the API that the frontend can make HTTP requests to.
 These routes (aka endpoints) provide various backend services like user logins and database access.
 """
 
-from api import app
-from flask import session, jsonify, render_template, url_for, redirect
 import flask
+from flask import jsonify, redirect, render_template, request, session, url_for
+from flask_login import current_user, login_required, login_user, logout_user
 from flask_swagger import swagger
+
+from api import app
+from api.models import get_user_by_name
 
 
 @app.route("/")
@@ -31,17 +34,46 @@ def login():
 
     TODO fill out details
     ---
+    parameters:
+      - in: body
+        name: body
+        schema:
+          id: User
+          required:
+            - username
+            - password
+          properties:
+            username:
+              type: string
+              description: User name
+            password:
+              type: string
+              description: Password for user
+
     responses:
       200:
         description: Successful login. Session established
+      400:
+        description: Invalid data or request
       401:
         description: Unsuccessful login.
     """
-    session["token"] = "test token"
-    return "<p>WIP!</p>"
+
+    data = request.get_json()
+    username = data.get("username")
+    password = data.get("password")
+    if username is None or password is None:
+        return "username or password not specified", 400
+    user = get_user_by_name(username)
+    if user is None or not user.check_password(password):
+        return "Invalid username or password", 401
+    # flask_login and this call to login_user handles the session for us
+    login_user(user)
+    return "", 200
 
 
 @app.route("/logout", methods=["POST"])
+@login_required
 def logout():
     """
     Logout endpoint. You must be logged in via /login to use this.
@@ -54,11 +86,12 @@ def logout():
       401:
         description: Unsuccessful logout. User was not logged in.
     """
-    session.pop("token", default=None)
-    return ""
+    logout_user()
+    return "", 200
 
 
 @app.route("/resource")
+@login_required
 def get_resource():
     """
     Sample endpoint depending on having logged in with /login
@@ -71,15 +104,43 @@ def get_resource():
       401:
         description: Invalid or non-existent user session.
     """
-    # Example endpoint using a session. Post to /login first, store the cookie,
-    # and send the cookie with a get to /resource to test. E.g.
-    #
-    #   curl -X POST http://127.0.0.1:5000/login -c cookies.txt
-    #   curl -b cookies.txt -X GET http://127.0.0.1:5000/resource
-    if session.get("token") != "test token":
-        # Return 401 Unauthorized
-        return "", 401
-    return "<p>Your data</p>"
+    return jsonify({"message": "Resource loaded"}), 200
+
+
+@app.route("/sample/<int:id>", methods=["POST"])
+def get_sample(id: int):
+    """
+    Sample endpoint taking a path parameter, body data, and query parameter.
+
+    Form and header data are also available
+    ---
+    parameters:
+      - in: path
+        name: id
+        description: An id for the sample resource we'll look up
+        required: true
+      - in: body
+        name: data
+        description: Some bigger data passed to the request body
+        required: true
+        required:
+              - data
+            properties:
+              data:
+                type: string
+                description: Test string data
+      - in: query
+        name: option
+        description: Some small flag passed as a query string
+        required: true
+    responses:
+      200:
+        description: Valid session. Returns test HTML.
+    """
+    # Refer to parameters by name
+    return {
+        "message": f"Data for passed id={id}, body data={request.get_json().get("data")}, query={request.args.get("option")}"
+    }
 
 
 @app.route("/spec")

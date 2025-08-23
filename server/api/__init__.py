@@ -8,6 +8,7 @@ import os
 import secrets
 
 from flask import Flask
+from flask_login import LoginManager
 from flask_swagger_ui import get_swaggerui_blueprint
 
 
@@ -34,12 +35,15 @@ app = Flask(__name__)
 # Set secret key to enable session usage
 app.secret_key = get_or_create_secret_key()
 
-# Configure Swagger UI blueprint
+# Configure Swagger UI blueprint to show interactive API doc
 SWAGGER_URL = "/swagger-ui"
 API_URL = "/spec"  # Endpoint for your Swagger JSON
 swaggerui_blueprint = get_swaggerui_blueprint(
     SWAGGER_URL, API_URL, config={"app_name": "Ambient App Backend"}
 )
 app.register_blueprint(swaggerui_blueprint, url_prefix=SWAGGER_URL)
+
+# Configure login management
+login = LoginManager(app)
 
 from api import routes
