@@ -133,17 +133,17 @@ def get_sample(id: int):
         required: true
         required:
               - data
-            properties:
-              data:
-                type: string
-                description: Test string data
+        properties:
+          data:
+            type: string
+            description: Test string data
       - in: query
         name: option
         description: Some small flag passed as a query string
         required: true
     responses:
       200:
-        description: Valid session. Returns test HTML.
+        description: Valid session. Returns test JSON.
     """
     return {
         "message": f"Data for passed id={id}, body data={request.get_json().get("data")}, query={request.args.get("option")}"
