@@ -19,6 +19,8 @@ WIP: Front-end only setup
 
 #### WIP: First-time back-end setup. Only do this once!
 
+**Important** Please use Python 3.13 for working on this project. Having a standard version ensures we all have a reproducible environment that behaves the same.
+
 We use a [Python virtual environment](https://realpython.com/python-virtual-environments-a-primer/) with [`venv`](https://docs.python.org/3/library/venv.html). It isolates our project's dependencies from the globally installed Python and system packages. The links above go into much more detail about virtual environments and how they work.
 
 Set up the `venv` folder
