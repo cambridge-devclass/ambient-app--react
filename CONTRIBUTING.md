@@ -106,13 +106,16 @@ The debug configuration for the Flask app is defined in [.vscode/launch.json](.v
 
 WIP: Provide instructions on how to format commit messages.
 
+* Include Issue ID in commit message (if this issue is listed in github repo). Example:<br>
+`[10] Add icons, starter set `
+
 ### Pull requests
 
 WIP: Example pull request.
 
 ### Deployment
 
-WIP
+WIP: Explain deployment process.
 
 ### Issue management
 
