@@ -12,7 +12,8 @@ from flask_login import current_user, login_required, login_user, logout_user
 from flask_swagger import swagger
 
 from api import app
-from api.models import get_user_by_name
+from api.models import get_user_by_name, insert_user
+
 
 
 @app.route("/")
@@ -89,6 +90,42 @@ def logout():
     logout_user()
     return "", 200
 
+
+@app.route("/user", methods=["POST"])
+def add_user():
+    """
+    Add user endpoint.
+
+    Username must be unique and nonempty, password must be nonempty
+    ---
+    parameters:
+      - in: body
+        name: user_data
+        required: 
+          - username
+            password
+        description: user/pass info
+        properties:
+          username:
+            type: string
+            description: Name to look up for user
+          password:
+            type: string
+            description: Plaintext password
+    responses:
+      200:
+        description: Successfully created user record
+      400:
+        description: Invalid data or request
+
+    """
+    try:
+        params = request.get_json()
+        insert_user(params["username"], params["password"])
+        return "", 200
+    except Exception as e:
+        # todo(?), return more helpful error messages to client
+        return str(e), 400
 
 @app.route("/resource")
 @login_required

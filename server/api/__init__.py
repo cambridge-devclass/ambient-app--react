@@ -43,6 +43,26 @@ swaggerui_blueprint = get_swaggerui_blueprint(
 )
 app.register_blueprint(swaggerui_blueprint, url_prefix=SWAGGER_URL)
 
+
+# Use sqlalchemy to connect to db
+from sqlalchemy import create_engine
+from sqlalchemy.orm import Session
+
+# Get the db url from config file
+import sys
+sys.path.append("../config")
+from config.sqlite import DB_URL
+
+# Set autocommit to false, requiring
+# explicit calls to session.commit()
+engine = create_engine(
+    DB_URL, connect_args={"autocommit": False}
+)
+
+# Session provides api for executing queries
+session = Session(engine)
+
+
 # Configure login management
 login = LoginManager(app)
 
