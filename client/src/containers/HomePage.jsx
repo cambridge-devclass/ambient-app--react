@@ -1,15 +1,19 @@
 import React from 'react';
-import { Icon } from '../components/Icon';
+import { Footer } from './Footer';
+import { Header } from './Header';
+import { SoundBoard } from './SoundBoard';
+import { SavedSounds } from './SavedSounds';
 import './HomePage.css';
 
 export function HomePage() {
   return (
-    <>
-      Home page will be here.
-      <br/>
-      Icon component example:
-      <br/>
-      <Icon name="home" />
-    </>
+    <div className="homepage">
+      <Header />
+      <div className="homepage__content">
+        <SavedSounds />
+        <SoundBoard />
+      </div>
+      <Footer />
+    </div>
   );
 };
