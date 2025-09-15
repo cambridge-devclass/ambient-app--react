@@ -39,3 +39,4 @@ Code formatting:
 * Use BEM naming convention for CSS classes - https://www.geeksforgeeks.org/css/understanding-the-css-bem-convention/
 * Use ESLint (ToDo: add ESLint to project)
 * Use "classnames" library to combine classnames
+
