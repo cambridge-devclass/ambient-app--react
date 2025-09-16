@@ -2,6 +2,9 @@ import sys
 import sqlite3
 from config.sqlite import DB_FILENAME
 
+"""
+This script can be run to create a "local.db" sqlite file, for local testing. 
+"""
 def execute_sql_file(sql_file_path):
     """
     Loads SQL commands from a file and executes them in a SQLite database.
