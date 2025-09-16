@@ -104,6 +104,7 @@ def add_user():
         required: 
           - username
             password
+            confirm_password
         description: user/pass info
         properties:
           username:
@@ -112,6 +113,9 @@ def add_user():
           password:
             type: string
             description: Plaintext password
+          confirm_password:
+            type: string
+            decription: Should match password
     responses:
       200:
         description: Successfully created user record
@@ -121,6 +125,9 @@ def add_user():
     """
     try:
         params = request.get_json()
+        if params["password"] != params["confirm_password"]:
+            raise Exception("Password fields must match")
+
         insert_user(params["username"], params["password"])
         return "", 200
     except Exception as e:

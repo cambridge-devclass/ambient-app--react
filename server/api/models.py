@@ -20,12 +20,18 @@ class User(Base, UserMixin):
     __tablename__ = "users"
 
     id: Mapped[int] = mapped_column(primary_key=True)
-    username: Mapped[str] = mapped_column(unique=True)
-    password_hash: Mapped[str] = mapped_column(String(100))
-    is_active: Mapped[bool] = mapped_column()
+    username: Mapped[str] = mapped_column(unique=True, nullable=False)
+    password_hash: Mapped[str] = mapped_column(String(100), nullable=False)
+    is_active: Mapped[bool] = mapped_column(default=True, nullable=False)
 
-    def __init__(self, name) -> None:
+    def __init__(self, name: str, password: str) -> None:
+        if not name:
+            raise Exception("User cannot be instantiated without username")
+        if not password:
+            raise Exception("User cannot be instantiated without a password")
+
         self.username = name
+        self.set_password(password)
 
     def set_password(self, password: str) -> None:
         "Set the user's password updating the stored hash"
@@ -54,8 +60,7 @@ def insert_user(username: str, password: str) -> User:
     if existing is not None:
         raise Exception("There is already a user with that username")
 
-    new_user = User(username)
-    new_user.set_password(password)
+    new_user = User(username, password)
     new_user.save()
 
     return new_user
