@@ -49,8 +49,6 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import Session
 
 # Get the db url from config file
-import sys
-sys.path.append("../config")
 from config.sqlite import DB_URL
 
 # Set autocommit to false, requiring
