@@ -70,6 +70,9 @@ def login():
         return "Invalid username or password", 401
     # flask_login and this call to login_user handles the session for us
     login_user(user)
+    if not user.is_authenticated:
+        return "There was a problem logging in, your account may have been deactivated.", 401
+    
     return "", 200
 
 
@@ -117,7 +120,7 @@ def add_user():
             type: string
             decription: Should match password
     responses:
-      200:
+      201:
         description: Successfully created user record
       400:
         description: Invalid data or request
@@ -129,7 +132,7 @@ def add_user():
             raise Exception("Password fields must match")
 
         insert_user(params["username"], params["password"])
-        return "", 200
+        return "", 201
     except Exception as e:
         # todo(?), return more helpful error messages to client
         return str(e), 400
