@@ -7,7 +7,7 @@ from werkzeug.security import check_password_hash, generate_password_hash
 
 from api import login, session
 
-from sqlalchemy import select, String
+from sqlalchemy import Boolean, select, String
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 
 class Base(DeclarativeBase):
@@ -22,7 +22,7 @@ class User(Base, UserMixin):
     id: Mapped[int] = mapped_column(primary_key=True)
     username: Mapped[str] = mapped_column(unique=True, nullable=False)
     password_hash: Mapped[str] = mapped_column(String(100), nullable=False)
-    is_active: Mapped[bool] = mapped_column(default=True, nullable=False)
+    is_active: Mapped[bool] = mapped_column(Boolean, default=True, nullable=False)
 
     def __init__(self, name: str, password: str) -> None:
         if not name:
@@ -50,8 +50,10 @@ def get_user_by_name(name: str) -> User | None:
 @login.user_loader
 def load_user(id: str) -> User | None:
     "Function used by Flask-Login to find a user"
-    stmt = select(User).filter_by(id=id, is_active=1)
-    return session.scalars(stmt).first()
+    stmt = select(User).filter_by(id=id)
+    user = session.scalars(stmt).first()
+    
+    return user
 
 
 def insert_user(username: str, password: str) -> User:
