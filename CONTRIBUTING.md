@@ -106,8 +106,8 @@ The debug configuration for the Flask app is defined in [.vscode/launch.json](.v
 
 WIP: Provide instructions on how to format commit messages.
 
-* Include Issue ID in commit message (if this issue is listed in github repo). Example:<br>
-`[10] Add icons, starter set `
+* Include #IssueID in the commit message (github will cross-link the commit and the issue automatically). Example:<br>
+`[#10] Add icons, starter set `
 
 ### Pull requests
 
