@@ -46,19 +46,28 @@ app.register_blueprint(swaggerui_blueprint, url_prefix=SWAGGER_URL)
 
 # Use sqlalchemy to connect to db
 from sqlalchemy import create_engine
-from sqlalchemy.orm import Session
+from sqlalchemy.orm import scoped_session, sessionmaker
 
 # Get the db url from config file
 from config.sqlite import DB_URL
 
 # Set autocommit to false, requiring
-# explicit calls to session.commit()
+# explicit calls to Session.commit()
 engine = create_engine(
     DB_URL, connect_args={"autocommit": False}
 )
 
-# Session provides api for executing queries
-session = Session(engine)
+# Session acts as a "registry" of sessions; sessions provide an api for executing queries.
+# Methods for executing queries can be called on Session directly, which will
+# add a session to the registry if necessary and call those methods on the session object.
+# Calling Session.remove() ends a session and removes it from the registry. 
+session_factory = sessionmaker(engine)
+Session = scoped_session(session_factory)
+
+# This should ensure one db session per request.
+@app.teardown_request
+def close_db_connection(_e):
+    Session.remove()
 
 
 # Configure login management

@@ -5,7 +5,7 @@ Models used in the backend
 from flask_login import UserMixin
 from werkzeug.security import check_password_hash, generate_password_hash
 
-from api import login, session
+from api import login, Session
 
 from sqlalchemy import Boolean, select, String
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
@@ -13,8 +13,8 @@ from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 class Base(DeclarativeBase):
     def save(self) -> None:
         "Commit any changes to this model to the db"
-        session.add(self)
-        session.commit()
+        Session.add(self)
+        Session.commit()
 
 class User(Base, UserMixin):
     __tablename__ = "users"
@@ -44,14 +44,14 @@ class User(Base, UserMixin):
 
 def get_user_by_name(name: str) -> User | None:
     stmt = select(User).filter_by(username=name)
-    return session.scalars(stmt).first()
+    return Session.scalars(stmt).first()
     
 
 @login.user_loader
 def load_user(id: str) -> User | None:
     "Function used by Flask-Login to find a user"
     stmt = select(User).filter_by(id=id)
-    user = session.scalars(stmt).first()
+    user = Session.scalars(stmt).first()
     
     return user
 
