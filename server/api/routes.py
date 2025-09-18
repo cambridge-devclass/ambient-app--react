@@ -65,12 +65,13 @@ def login():
     password = data.get("password")
     if username is None or password is None:
         return "username or password not specified", 400
+
     user = get_user_by_name(username)
     if user is None or not user.check_password(password):
         return "Invalid username or password", 401
+
     # flask_login and this call to login_user handles the session for us
-    login_user(user)
-    if not user.is_authenticated:
+    if not login_user(user):
         return "There was a problem logging in, your account may have been deactivated.", 401
     
     return "", 200
@@ -86,7 +87,7 @@ def logout():
     ---
     responses:
       200:
-        description: Successful login. Session deleted.
+        description: Successful logout. Session deleted.
       401:
         description: Unsuccessful logout. User was not logged in.
     """
