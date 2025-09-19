@@ -59,6 +59,24 @@ pip install -r requirements.txt
 
 Now you've got a virtual environment with necessary Python packages installed locally!
 
+##### SQLite setup (temporary)
+The application can be run using SQLite for the database. This makes the setup process a little easier, because SQLite is built-in to Python.
+ 
+To create a local SQLite database file, run the `_sqilite-setup.py` script in the server directory: 
+
+```bash
+cd server
+python _sqlite-setup.py
+```
+
+This should create a "local.db" file in the server directory, which the server will use as long as it retrieves `DB_URL` from `config/sqlite.py`. 
+
+A GUI database client is generally useful for backend development, it makes it easy to look up or change records/schema for debugging or prototyping.
+HeidiSQL is pretty good but there are many alternatives. Here are some that support SQLite: \
+https://heidisql.com \
+https://dbeaver.io \
+https://sqlitebrowser.org
+
 #### WIP: Backend setup for every session
 
 In every working session make sure you

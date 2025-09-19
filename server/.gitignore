@@ -13,3 +13,5 @@ venv.bak/
 
 # Flask secret key file
 flask_secret_key.txt
+
+local.db
