@@ -1,20 +1,36 @@
-import pytest
-
-import config.sqlite
-
-# Override the sqlite url to use an in memory database for testing
-config.sqlite.DB_URL = "sqlite:///:memory:"
+import os
+import tempfile
 
 import flask.testing
+import pytest
 
+# Override the database to use a temporary one
+import config.sqlite
+
+TEST_DIR = tempfile.TemporaryDirectory()
+TEST_DB = os.path.join(TEST_DIR.name, "test.db")
+config.sqlite.DB_URL = f"sqlite:///{TEST_DB}"
+config.sqlite.DB_FILENAME = TEST_DB
 from api import app as _raw_flask_app
-from api import engine
+from api.models import insert_user
+from db_scripts.sqlite_setup import init_db
 
 
-@pytest.fixture()
-def app():
+@pytest.fixture(scope="session")
+def user_info():
+    return {"username": "test_user", "password": "test_pass"}
+
+
+@pytest.fixture(scope="session")
+def app(user_info):
     _raw_flask_app.testing = True
-    assert str(engine.url) == "sqlite:///:memory:"
+
+    # Set up the database
+    init_db()
+
+    # Add a test user
+    insert_user(user_info["username"], user_info["password"])
+
     # other setup can go here
 
     yield _raw_flask_app
