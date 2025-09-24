@@ -72,8 +72,3 @@ def app(user_info: UserTestInfo):
 def client(app) -> flask.testing.FlaskClient:
     """Main Pytest fixture to get access to a test client for our Flask app"""
     return app.test_client()
-
-
-@pytest.fixture()
-def runner(app):
-    return app.test_cli_runner()
