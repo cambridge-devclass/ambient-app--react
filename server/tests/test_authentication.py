@@ -1,5 +1,7 @@
 from flask.testing import FlaskClient
 
+from tests.conftest import UserTestInfo
+
 
 def test_index(client: FlaskClient):
     """Test basic index routing to see that we should get an HTML page"""
@@ -14,7 +16,7 @@ def test_no_login(client: FlaskClient):
     assert result.status_code == 401
 
 
-def test_login(client: FlaskClient, user_info):
+def test_login(client: FlaskClient, user_info: UserTestInfo):
     """
     Test that logging in allows us to access the protected resource
 
@@ -22,7 +24,7 @@ def test_login(client: FlaskClient, user_info):
     """
     login_result = client.post(
         "/login",
-        json={"username": user_info["username"], "password": user_info["password"]},
+        json={"username": user_info.username, "password": user_info.password},
     )
     assert login_result.status_code == 200
 
@@ -41,7 +43,7 @@ def test_logout_no_login(client: FlaskClient):
     assert bad_logout.status_code == 401
 
 
-def test_logout_after_login(client: FlaskClient, user_info):
+def test_logout_after_login(client: FlaskClient, user_info: UserTestInfo):
     """
     Test that logging out after a successful login revokes access to protected endpoints
     """
@@ -53,7 +55,7 @@ def test_logout_after_login(client: FlaskClient, user_info):
     # Log in
     login_result = client.post(
         "/login",
-        json={"username": user_info["username"], "password": user_info["password"]},
+        json={"username": user_info.username, "password": user_info.password},
     )
     assert login_result.status_code == 200
 
