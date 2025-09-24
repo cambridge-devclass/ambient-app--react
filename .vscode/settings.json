@@ -9,5 +9,8 @@
       "source.organizeImports": "explicit"
     },
     "editor.formatOnSave": true
-  }
+  },
+  "python.testing.pytestArgs": ["server"],
+  "python.testing.unittestEnabled": false,
+  "python.testing.pytestEnabled": true
 }
