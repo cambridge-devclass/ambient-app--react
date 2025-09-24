@@ -121,6 +121,17 @@ Now all of the Python intellisense and tooling in VSCode should work!
 
 The debug configuration for the Flask app is defined in [.vscode/launch.json](.vscode/launch.json). You can debug the Flask app in VS Code by opening the debug panel, choosing `Flask Api Server` in the dropdown, and clicking the green run button. `F5` will also start the debugger. You can then set breakpoints and step through the server code.
 
+### Testing the backend
+
+The backend uses [Pytest](https://docs.pytest.org/en/stable/index.html) to test the Flask app and other services. To run the backend tests activate the Python venv as shown above and then in a terminal run
+
+```bash
+cd server
+pytest
+```
+
+You can also [run and debug tests](https://code.visualstudio.com/docs/python/testing#_run-tests) directly in VSCode. Click on the **Testing** panel on the left (it looks like a flask) and choose tests to run there. Small play buttons also show up in test files when you open them. The link above shows more details.
+
 ### Commit messages
 
 WIP: Provide instructions on how to format commit messages.
