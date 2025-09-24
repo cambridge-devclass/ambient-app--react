@@ -132,6 +132,8 @@ pytest
 
 You can also [run and debug tests](https://code.visualstudio.com/docs/python/testing#_run-tests) directly in VSCode. Click on the **Testing** panel on the left (it looks like a flask) and choose tests to run there. Small play buttons also show up in test files when you open them. The link above shows more details.
 
+The Flask documentation provides more info about how to [test Flask apps](https://flask.palletsprojects.com/en/stable/testing/) that is quite useful.
+
 ### Commit messages
 
 WIP: Provide instructions on how to format commit messages.
