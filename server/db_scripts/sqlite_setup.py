@@ -1,6 +1,5 @@
 import os
 import sqlite3
-import sys
 
 from config.sqlite import DB_FILENAME
 
