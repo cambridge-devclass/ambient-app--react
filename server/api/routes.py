@@ -15,7 +15,6 @@ from api import app
 from api.models import get_user_by_name, insert_user
 
 
-
 @app.route("/")
 def index():
     """
@@ -32,8 +31,6 @@ def index():
 def login():
     """
     Login endpoint. Establishes a session after successful login.
-
-    TODO fill out details
     ---
     parameters:
       - in: body
@@ -72,8 +69,11 @@ def login():
 
     # flask_login and this call to login_user handles the session for us
     if not login_user(user):
-        return "There was a problem logging in, your account may have been deactivated.", 401
-    
+        return (
+            "There was a problem logging in, your account may have been deactivated.",
+            401,
+        )
+
     return "", 200
 
 
@@ -105,7 +105,7 @@ def add_user():
     parameters:
       - in: body
         name: user_data
-        required: 
+        required:
           - username
             password
             confirm_password
@@ -137,6 +137,7 @@ def add_user():
     except Exception as e:
         # todo(?), return more helpful error messages to client
         return str(e), 400
+
 
 @app.route("/resource")
 @login_required

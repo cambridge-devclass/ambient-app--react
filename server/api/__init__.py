@@ -60,9 +60,10 @@ engine = create_engine(
 # Session acts as a "registry" of sessions; sessions provide an api for executing queries.
 # Methods for executing queries can be called on Session directly, which will
 # add a session to the registry if necessary and call those methods on the session object.
-# Calling Session.remove() ends a session and removes it from the registry. 
+# Calling Session.remove() ends a session and removes it from the registry.
 session_factory = sessionmaker(engine)
 Session = scoped_session(session_factory)
+
 
 # This should ensure one db session per request.
 @app.teardown_request

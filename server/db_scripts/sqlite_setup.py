@@ -1,10 +1,13 @@
-import sys
+import os
 import sqlite3
+
 from config.sqlite import DB_FILENAME
 
 """
-This script can be run to create a "local.db" sqlite file, for local testing. 
+This script can be run to create a "local.db" sqlite file, for local testing.
 """
+
+
 def execute_sql_file(sql_file_path):
     """
     Loads SQL commands from a file and executes them in a SQLite database.
@@ -17,7 +20,7 @@ def execute_sql_file(sql_file_path):
         conn = sqlite3.connect(DB_FILENAME)
         cursor = conn.cursor()
 
-        with open(sql_file_path, 'r') as f:
+        with open(sql_file_path, "r") as f:
             sql_script = f.read()
 
         cursor.executescript(sql_script)
@@ -33,6 +36,13 @@ def execute_sql_file(sql_file_path):
             conn.close()
 
 
+def init_db():
+    """
+    Run the script to set up the main database
+    """
+    this_dir = os.path.dirname(os.path.abspath(__file__))
+    execute_sql_file(os.path.join(this_dir, "..", "migrations", "sqlite-setup.sql"))
+
 
 if __name__ == "__main__":
-    execute_sql_file("migrations/sqlite-setup.sql")
+    init_db()
