@@ -16,3 +16,6 @@ Features:
 This project is a part of [Web Development class](https://hattifnatt4r.github.io/sd). 
 
 See [CONTRIBUTING.md](https://github.com/cambridge-devclass/ambient-app--react?tab=contributing-ov-file) if you're interested in participating.
+
+Suggested design:
+![ambient app suggested design](https://devclass-program.s3.us-east-2.amazonaws.com/projects_ambient-react.png)
